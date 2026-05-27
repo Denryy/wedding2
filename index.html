@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Заголовок страницы — меняется через CONFIG.meta.title в script.js -->
+  <title>Той шақыру</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: корпус + декоративный -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== АУДИО: ссылка меняется в CONFIG.music ===== -->
+  <audio id="bg-music" loop>
+    <source src="./assets/1687438130.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Кнопка музыки -->
+  <button class="music-btn" id="musicBtn" aria-label="Музыканы қосу">
+    <span class="music-icon">♪</span>
+  </button>
+
+  <!-- ===================================================
+       1. HERO — первый экран
+       Тексты из CONFIG.hero
+  =================================================== -->
+  <section class="photo-hero">
+    <img src="./assets/hero-photo.png" alt="Wedding photo">
+  </section>
+  <section class="hero" id="hero">
+    <div class="hero__decor hero__decor--tl"></div>
+    <div class="hero__decor hero__decor--br"></div>
+    <div class="hero__inner">
+      <p class="hero__label" id="heroLabel"></p>
+      <div class="hero__divider">
+        <span class="hero__line"></span>
+        <span class="hero__ornament">✦</span>
+        <span class="hero__line"></span>
+      </div>
+      <h1 class="hero__names" id="heroNames"></h1>
+      <div class="hero__divider">
+        <span class="hero__line"></span>
+        <span class="hero__ornament">✦</span>
+        <span class="hero__line"></span>
+      </div>
+      <p class="hero__date" id="heroDate"></p>
+    </div>
+    <div class="hero__scroll-hint">↓</div>
+  </section>
+  <section class="new-photo-section">
+    <img src="./assets/venue-photo.jpg" alt="Wedding venue">
+  </section>
+
+  <!-- ===================================================
+       2. БЛОК ПРИГЛАШЕНИЯ
+       Тексты из CONFIG.invitation
+  =================================================== -->
+  <section class="section invite reveal" id="inviteSection">
+    <div class="container">
+      <div class="invite__frame">
+        <p class="invite__greeting" id="inviteGreeting"></p>
+        <div class="ornament-row"><span>— ✦ —</span></div>
+        <p class="invite__text" id="inviteText"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       3. ТОЙ ИЕЛЕРІ / РОДИТЕЛИ
+       Тексты из CONFIG.parents
+  =================================================== -->
+  <section class="section parents reveal" id="parentsSection">
+    <div class="container">
+      <h2 class="section__title" id="parentsTitle"></h2>
+      <div class="parents__grid" id="parentsGrid">
+        <!-- JS вставит карточки родителей -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       4. ДАТА И ВРЕМЯ
+       Данные из CONFIG.event
+  =================================================== -->
+  <!-- <section class="section datetime reveal" id="datetimeSection">
+    <div class="container">
+      <h2 class="section__title" id="datetimeTitle"></h2>
+      <div class="datetime__card">
+        <div class="datetime__item">
+          <span class="datetime__icon">✧</span>
+          <span class="datetime__value" id="eventDate"></span>
+        </div>
+        <div class="datetime__sep"></div>
+        <div class="datetime__item">
+          <span class="datetime__icon">✦</span>
+          <span class="datetime__value" id="eventTime"></span>
+        </div>
+      </div>
+      <p class="datetime__note" id="datetimeNote"></p>
+    </div>
+  </section> -->
+
+  <!-- ===================================================
+     ДАТА + ВРЕМЯ + COUNTDOWN В ОДНОМ БЛОКЕ
+=================================================== -->
+<!-- ===================================================
+     DATE + TIME + COUNTDOWN
+=================================================== -->
+<section class="section datetime reveal" id="datetimeSection">
+
+  <div class="container">
+
+    <h2 class="section__title" id="datetimeTitle"></h2>
+
+    <div class="datetime__card">
+
+      <!-- TOP -->
+      <div class="datetime__top">
+
+        <!-- DATE -->
+        <div class="datetime__item">
+          <span class="datetime__icon">✧</span>
+          <span class="datetime__value" id="eventDate"></span>
+        </div>
+
+        <!-- LINE -->
+        <div class="datetime__sep"></div>
+
+        <!-- TIME -->
+        <div class="datetime__item">
+          <span class="datetime__icon">✦</span>
+          <span class="datetime__value" id="eventTime"></span>
+        </div>
+
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="datetime__countdown">
+
+        <div class="countdown__grid">
+
+          <div class="countdown__block">
+            <span class="countdown__num" id="cdDays">--</span>
+            <span class="countdown__label" id="cdDaysLabel"></span>
+          </div>
+
+          <div class="countdown__block">
+            <span class="countdown__num" id="cdHours">--</span>
+            <span class="countdown__label" id="cdHoursLabel"></span>
+          </div>
+
+          <div class="countdown__block">
+            <span class="countdown__num" id="cdMinutes">--</span>
+            <span class="countdown__label" id="cdMinutesLabel"></span>
+          </div>
+
+          <div class="countdown__block">
+            <span class="countdown__num" id="cdSeconds">--</span>
+            <span class="countdown__label" id="cdSecondsLabel"></span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <p class="datetime__note" id="datetimeNote"></p>
+
+  </div>
+
+</section>
+  <!-- ===================================================
+       5. COUNTDOWN — обратный отсчёт
+  =================================================== -->
+  <!-- <section class="section countdown reveal" id="countdownSection">
+    <div class="container">
+      <h2 class="section__title" id="countdownTitle"></h2>
+      <div class="countdown__grid">
+        <div class="countdown__block">
+          <span class="countdown__num" id="cdDays">--</span>
+          <span class="countdown__label" id="cdDaysLabel"></span>
+        </div>
+        <div class="countdown__dot">:</div>
+        <div class="countdown__block">
+          <span class="countdown__num" id="cdHours">--</span>
+          <span class="countdown__label" id="cdHoursLabel"></span>
+        </div>
+        <div class="countdown__dot">:</div>
+        <div class="countdown__block">
+          <span class="countdown__num" id="cdMinutes">--</span>
+          <span class="countdown__label" id="cdMinutesLabel"></span>
+        </div>
+        <div class="countdown__dot">:</div>
+        <div class="countdown__block">
+          <span class="countdown__num" id="cdSeconds">--</span>
+          <span class="countdown__label" id="cdSecondsLabel"></span>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ===================================================
+       6. МЕСТО — ресторан и карта
+       Данные из CONFIG.venue
+  =================================================== -->
+  <section class="venue-photo-section1">
+    <img src="./assets/wedding-photo.jpg" alt="Wedding table">
+  </section>
+  <section class="section venue reveal" id="venueSection">
+    <div class="container">
+      <h2 class="section__title" id="venueTitle"></h2>
+      <div class="venue__card">
+        <p class="venue__name" id="venueName"></p>
+        <p class="venue__address" id="venueAddress"></p>
+        <!-- Кнопка 2GIS: ссылка из CONFIG.venue.mapUrl -->
+        <a class="btn btn--map" id="mapBtn" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. RSVP ФОРМА
+       Тексты и варианты из CONFIG.rsvp
+  =================================================== -->
+  <section class="section rsvp reveal" id="rsvpSection">
+    <div class="container">
+      <h2 class="section__title" id="rsvpTitle"></h2>
+      <p class="rsvp__subtitle" id="rsvpSubtitle"></p>
+
+      <!-- Форма — данные НЕ отправляются на сервер, обрабатываются JS -->
+      <div class="rsvp__form" id="rsvpForm">
+
+        <!-- Имя -->
+        <div class="form__group">
+          <label class="form__label" id="nameLabel"></label>
+          <input class="form__input" type="text" id="inputName" autocomplete="name" />
+        </div>
+
+        <!-- Radio-варианты — генерируются JS из CONFIG.rsvp.options -->
+        <div class="form__group">
+          <p class="form__label" id="attendLabel"></p>
+          <div class="form__radios" id="rsvpRadios"></div>
+        </div>
+
+        <!-- Количество гостей -->
+        <div class="form__group">
+          <label class="form__label" id="countLabel"></label>
+          <input class="form__input form__input--num" type="number" id="inputCount" min="1" max="20" value="1" />
+        </div>
+
+        <button class="btn btn--submit" id="submitBtn"></button>
+      </div>
+
+      <!-- Сообщение об успехе — скрыто по умолчанию -->
+      <div class="rsvp__success hidden" id="rsvpSuccess">
+        <div class="success__icon">✓</div>
+        <p class="success__text" id="successText"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. ФИНАЛЬНЫЙ БЛОК
+       Тексты из CONFIG.outro
+  =================================================== -->
+  <section class="section outro reveal" id="outroSection">
+    <div class="container">
+      <div class="outro__frame">
+        <p class="outro__text" id="outroText"></p>
+        <div class="ornament-row"><span>✦</span></div>
+        <p class="outro__names" id="outroNames"></p>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
