@@ -496,4 +496,40 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initMusic();
   initRSVP();
+  
+  setTimeout(startAutoScroll, 1000);
+});
+
+function startAutoScroll() {
+  const speed = 0.45; // скорость: 0.3 медленно, 0.7 быстрее
+  let paused = false;
+
+  function step() {
+    if (!paused) {
+      window.scrollBy(0, speed);
+    }
+
+    const bottomReached =
+      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+
+    if (!bottomReached) {
+      requestAnimationFrame(step);
+    }
+  }
+
+  ["wheel", "touchstart", "mousedown"].forEach(eventName => {
+    window.addEventListener(eventName, () => {
+      paused = true;
+
+      setTimeout(() => {
+        paused = false;
+      }, 2500);
+    });
+  });
+
+  requestAnimationFrame(step);
+}
+
+window.addEventListener("load", () => {
+  setTimeout(startAutoScroll, 2000);
 });
