@@ -1417,3 +1417,158 @@ body {
     font-size: 1.8rem !important;
   }
 }
+
+/* Разделяем дату/время и countdown на два отдельных блока */
+
+.datetime__card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  gap: 18px;
+}
+
+/* Верхний блок: дата и время */
+.datetime__top {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(201,169,110,0.28);
+  border-radius: 32px;
+  padding: 24px 18px;
+  box-shadow: 0 10px 30px rgba(176,141,87,0.06);
+}
+
+/* Нижний блок: обратный отсчёт */
+.datetime__countdown {
+  width: 100%;
+  margin-top: 0 !important;
+  padding: 22px 16px !important;
+  border-top: none !important;
+
+  background: #fff;
+  border: 1px solid rgba(201,169,110,0.28);
+  border-radius: 32px;
+  box-shadow: 0 10px 30px rgba(176,141,87,0.06);
+}
+
+/* Убираем старый декоративный фон */
+.datetime__card::before {
+  display: none !important;
+}
+
+/* Фото между датой и countdown */
+
+.datetime__photo {
+  width: 100%;
+  margin: 18px 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+}
+
+.datetime__photo::before,
+.datetime__photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.datetime__photo::before {
+  top: 0;
+  background: linear-gradient(to bottom, #fff, rgba(255,255,255,0));
+}
+
+.datetime__photo::after {
+  bottom: 0;
+  background: linear-gradient(to top, #fff, rgba(255,255,255,0));
+}
+
+.datetime__photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+/* Фото на всю ширину экрана */
+.datetime__photo {
+  width: 100vw !important;
+  margin-left: 50% !important;
+  transform: translateX(-50%) !important;
+  border-radius: 0 !important;
+}
+
+.datetime__photo img {
+  width: 100vw !important;
+  height: auto;
+  display: block;
+}
+
+/* Чтобы границы верхнего и нижнего блока не обрезались */
+.datetime__top,
+.datetime__countdown {
+  width: calc(100% - 8px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  overflow: visible !important;
+}
+
+/* Чуть уменьшаем внутреннюю ширину карточки */
+.datetime__card {
+  overflow: visible !important;
+}
+
+/* Исправление фото и границ блоков */
+
+.datetime__card {
+  overflow: visible !important;
+}
+
+/* Фото по ширине контента, без смещения */
+.datetime__photo {
+  width: 110% !important;
+  margin: 22px 0 !important;
+  transform: none !important;
+  margin-left: 0 !important;
+  border-radius: 28px !important;
+  overflow: hidden !important;
+}
+
+.datetime__photo img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+}
+
+/* Возвращаем нормальные границы верхнего и нижнего блока */
+.datetime__top,
+.datetime__countdown {
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  background: #fff !important;
+  border: 1px solid rgba(201,169,110,0.35) !important;
+  border-radius: 32px !important;
+
+  overflow: visible !important;
+}
+
+/* Чтобы нижняя граница countdown точно была видна */
+.datetime__countdown {
+  margin-bottom: 10px !important;
+  padding: 22px 14px 28px !important;
+}
+
+.datetime__card {
+  gap: 0 !important;
+}
+
+.datetime__photo {
+  margin-top: 4px !important;
+  margin-bottom: 4px !important;
+}
