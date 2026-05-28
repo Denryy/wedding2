@@ -1298,8 +1298,8 @@ body {
 /* Основной текст приглашения */
 .invite__text {
   font-size: clamp(1.7rem, 6vw, 2.2rem) !important;
+  line-height: 1.35 !important;
 }
-
 /* Имена родителей / той иелері:
    "Асхад - Ақжарқын"
 */
@@ -1351,7 +1351,10 @@ body {
 */
 .rsvp__subtitle,
 .form__label,
-.form__radio,
+.form__radio {
+  font-size: 1.2rem !important;
+}
+
 .form__input,
 .btn {
   font-size: 1.3rem !important;
