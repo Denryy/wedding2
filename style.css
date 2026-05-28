@@ -1241,3 +1241,176 @@ body {
   object-fit: cover;
   object-position: center;
 }
+
+/* =====================================================
+   MAX MOBILE READABILITY
+   Увеличение шрифтов и элементов для удобного чтения
+   на телефоне
+===================================================== */
+
+/* Общий размер текста на всём сайте */
+/* body {
+  font-size: 22px;
+} */
+
+/* Отступы сверху и снизу у всех секций */
+.section {
+  padding: 72px 0;
+}
+
+/* Заголовки секций:
+   "Той иелері", "Той күні мен уақыты",
+   "Той өтетін орын", "Тойға келесіз бе?"
+*/
+.section__title {
+  font-size: clamp(2.3rem, 8vw, 3rem) !important;
+}
+
+/* Маленький текст сверху на главном экране:
+   "Тойға шақыру"
+*/
+.hero__label {
+  font-size: clamp(1.15rem, 4.5vw, 1.5rem) !important;
+}
+
+/* Имена на главном экране:
+   "Азамат & Аружан"
+*/
+.hero__names {
+  font-size: clamp(2.1rem, 8vw, 3.2rem) !important;
+  white-space: nowrap;
+}
+
+/* Дата на главном экране:
+   "23 · VIII · 2026"
+*/
+.hero__date {
+  font-size: clamp(1.35rem, 5.5vw, 1.9rem) !important;
+}
+
+/* Приветствие в блоке приглашения:
+   "Құрметті ағайын-туыс..."
+*/
+.invite__greeting {
+  font-size: clamp(1.3rem, 4.8vw, 1.55rem) !important;
+}
+
+/* Основной текст приглашения */
+.invite__text {
+  font-size: clamp(1.7rem, 6vw, 2.2rem) !important;
+}
+
+/* Имена родителей / той иелері:
+   "Асхад - Ақжарқын"
+*/
+.parent__name {
+  font-size: clamp(2.5rem, 8vw, 3.2rem) !important;
+}
+
+/* Дата и время в карточке:
+   "23 тамыз 2026 жыл" и "19:00"
+*/
+.datetime__value {
+  font-size: clamp(1.65rem, 6vw, 2.2rem) !important;
+}
+
+/* Текст под датой и временем:
+   предупреждение не опаздывать
+*/
+.datetime__note {
+  font-size: clamp(1.3rem, 4.8vw, 1.6rem) !important;
+}
+
+/* Кружочки с цифрами обратного отсчёта */
+.countdown__num {
+  width: 62px !important;
+  height: 62px !important;
+  font-size: 2rem !important;
+}
+
+/* Подписи под обратным отсчётом:
+   "күн", "сағат", "минут", "секунд"
+*/
+.countdown__label {
+  font-size: 1.15rem !important;
+}
+
+/* Название ресторана */
+.venue__name {
+  font-size: clamp(1.9rem, 7vw, 2.5rem) !important;
+}
+
+/* Адрес ресторана */
+.venue__address {
+  font-size: 1.35rem !important;
+}
+
+/* Тексты формы:
+   подпись, labels, radio-варианты,
+   input и кнопки
+*/
+.rsvp__subtitle,
+.form__label,
+.form__radio,
+.form__input,
+.btn {
+  font-size: 1.3rem !important;
+}
+
+/* Поля ввода:
+   имя и количество гостей
+*/
+.form__input {
+  padding: 16px 18px;
+}
+
+/* Все кнопки:
+   2GIS, Жіберу
+*/
+.btn {
+  padding: 16px 36px;
+}
+
+/* Финальный текст:
+   "Келіңіздер, қуанышымызға ортақ болыңыздар!"
+*/
+.outro__text {
+  font-size: clamp(1.75rem, 6vw, 2.3rem) !important;
+}
+
+/* Имена в самом конце */
+.outro__names {
+  font-size: clamp(1.6rem, 5.5vw, 2rem) !important;
+}
+
+/* =====================================================
+   НАСТРОЙКИ ТОЛЬКО ДЛЯ ТЕЛЕФОНА
+   Работает, когда ширина экрана меньше 480px
+===================================================== */
+@media (max-width: 480px) {
+
+  /* Боковые отступы контейнера */
+  .container {
+    padding: 0 18px;
+  }
+
+  /* Внутренние отступы карточек */
+  .invite__frame,
+  .rsvp__form,
+  .venue__card,
+  .outro__frame {
+    padding: 34px 22px;
+  }
+
+  /* Расстояние между кружочками countdown */
+  .countdown__grid {
+    gap: 8px;
+  }
+
+  /* Размер кружочков countdown на телефоне */
+  .countdown__num {
+    width: 56px !important;
+    height: 56px !important;
+    font-size: 1.8rem !important;
+  }
+}
