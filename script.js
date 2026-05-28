@@ -496,40 +496,49 @@ document.addEventListener("DOMContentLoaded", () => {
   initReveal();
   initMusic();
   initRSVP();
-  
+
   setTimeout(startAutoScroll, 1000);
 });
 
+/* =====================================================
+   7. АВТОСКРОЛЛ
+   ===================================================== */
 function startAutoScroll() {
-  const speed = 0.45; // скорость: 0.3 медленно, 0.7 быстрее
-  let paused = false;
+  const SPEED        = 0.6;   // px за кадр (дробное — плавно)
+  const PAUSE_AFTER  = 3000;  // мс паузы после взаимодействия
 
-  function step() {
-    if (!paused) {
-      window.scrollBy(0, speed);
-    }
+  let paused      = false;
+  let rafId       = null;
+  let resumeTimer = null;
+  let pos         = window.scrollY; // субпиксельная позиция
 
-    const bottomReached =
-      window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-
-    if (!bottomReached) {
-      requestAnimationFrame(step);
-    }
+  function atBottom() {
+    return pos + window.innerHeight >= document.body.scrollHeight - 2;
   }
 
-  ["wheel", "touchstart", "mousedown"].forEach(eventName => {
-    window.addEventListener(eventName, () => {
-      paused = true;
+  function step() {
+    if (!paused && !atBottom()) {
+      pos += SPEED;
+      window.scrollTo(0, pos);
+    }
+    rafId = requestAnimationFrame(step);
+  }
 
-      setTimeout(() => {
-        paused = false;
-      }, 2500);
-    });
+  function pause() {
+    paused = true;
+    pos    = window.scrollY; // синхронизируем позицию после ручного скролла
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      pos    = window.scrollY; // ещё раз — вдруг пользователь домотал
+      paused = false;
+    }, PAUSE_AFTER);
+  }
+
+  // Слушаем все способы взаимодействия
+  ["wheel", "touchstart", "touchmove", "mousedown", "keydown", "pointerdown"].forEach(evt => {
+    window.addEventListener(evt, pause, { passive: true });
   });
 
-  requestAnimationFrame(step);
+  // Запуск
+  rafId = requestAnimationFrame(step);
 }
-
-window.addEventListener("load", () => {
-  setTimeout(startAutoScroll, 2000);
-});
